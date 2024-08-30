@@ -21,5 +21,26 @@ while True:
          
     print('Your choice is \n', choice_name)
     print('Computers Turn....')
+    """
+    computer chooses randomly any number among 1,2 amd 3
+    using randint method
+    """
+    comp_choice = random.randint(1,3)
+    while comp_choice == choice:
+        comp_choice = random.randint(1, 3)
+
+        if comp_choice == 1:
+            comp_choice_name = 'Rock'
+
+        elif comp_choice == 2:
+            comp_choice_name = 'Paper'
+        
+        else:
+            comp_choice_name = 'Scissors'
+
+        print("Computers choice is \n", comp_choice_name)
+        print(choice_name, "vs", comp_choice_name)
+
+
 
 
