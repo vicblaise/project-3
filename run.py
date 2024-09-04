@@ -1,115 +1,64 @@
+
 import random
 
 
 def print_introduction():
 
+
     """print the introduction of the game"""
-    
-    print(f"""
-The rules are
-Rock vs Paper ... Paper wins
-Rock vs scissors...Rock wins
-Paper vs Scissors... Scissors wins
+    print("""
+The rules are:
+1. Rock vs Paper ... Paper wins
+2. Rock vs Scissors... Rock wins
+3. Paper vs Scissors... Scissors wins
     """)
 
 
-while True:
-    try:
-        while choice > 3 or choice < 1:
-            choice= int(imput("Please Enter a valid choice"))
-    except:
-        print("Invalid choice")
-    
-    print ("Please enter your choice \n 1 -Rock \n 2 -Paper \n 3 -Scissors \n")
-    choice = int(input("Enter your choice:"))
-
-while choice > 3 or choice < 1:
-    choice = int(imput("Please Enter a valid choice"))
-    if choice == 1:
-        choice_name = 'Rock'
-    elif choice == 2:
-        choice_name = 'Paper'
-    else:  
-        choice_name = 'Scissors'
-
-    
-    print('Your choice is \n', choice_name)
-    print('Computers Turn....')
-    """
-    computer chooses randomly any number among 1,2 amd 3
-    using randint method
-    """
-    comp_choice = random.randint(1,3)
-    while comp_choice == choice:
-        comp_choice = random.randint(1, 3)
-
-        if comp_choice == 1:
-            comp_choice_name = 'Rock'
-
-        elif comp_choice == 2:
-            comp_choice_name = 'Paper'
-        
-        else:
-            comp_choice_name = 'Scissors'
-
-        print("Computers choice is \n", comp_choice_name)
-        print(choice_name, "vs", comp_choice_name)
-
-#checking for possible draw
-
-        if choice == comp_choice:
-            print("No winner", end = "")
-            result = 'DRAW'
-
-# checking for possible win
-        
-        if (choice==1 and comp_choice == 2):
-            print('paper wins', end ="")
-            result = 'Paper'
-
-        elif(choice == 2 and comp_choice == 1):
-            print("Paper wins", end = "")
-            result ='Paper'
-
-        if (choice == 1 and comp_choice == 3):
-            print("Rock wins", end ="")
-            result = 'Rock'
-
-        elif (choice == 3 and comp_choice == 1):
-            print("Rock wins", end = "")
-            result = 'Rock'
-
-        if (choice == 2 and comp_choice == 3):
-            print("Scissors wins", end = "")
-            result = Scissors
-
-        elif(choice == 3 and comp_choice == 2):
-            print("Scissors wins", end = "")
-            result = Rock
-
-
-#showing results for either user or computer win or draw
-        if result == 'Draw':
-            print("...its a Draw...")
-
-        if result == choice_name:
-            print("...User wins...")
-
-        else:
-            print("...Computer wins...")
-        print("Would you like to try agin? (Y/N)")
-
-        your_ans = input().lower()
-        if your_ans == 'n':
-            break
-
-
-print("hope you had fun? BYE")
-
-
 def main():
-    """"""
     print_introduction()
+
+    choices = {1: 'Rock', 2: 'Paper', 3: 'Scissors'}
+
+    while True:
+        # User's choice
+        while True:
+            try:
+                choice_num = int(input("Please enter your choice (1-Rock, 2- Paper, 3- Scissors):").strip())
+                if choice_num in [1, 2, 3]:
+                    choice_name = choices[choice_num]
+                    break
+                else:
+                    print("Invalid choice, please enter 1, 2, or 3.")
+            except ValueError:
+                print("Invalid input. Please enter a number (1- Rock, 2- Paper, 3- Scissors).")
+
+        print('Your choice is:', choice_name)
+
+        # Computer's choice
+        comp_choice_num = random.randint(1, 3)
+        comp_choice_name = choices[comp_choice_num]
+        print("Computer's choice is:", comp_choice_name)
+
+        # Check for a draw
+        if choice_num == comp_choice_num:
+            print(f"Both chose {choice_name}. It's a draw!")
+            result = 'Draw'
+        else:
+            # Check for win/loss
+            if(choice_num == 1 and comp_choice_num == 3) or \
+            (choice_num == 2 and comp_choice_num == 1) or \
+            (choice_num == 3 and comp_choice_num == 2):
+                print(f"{choice_name} beats {comp_choice_name}. You win!")
+                result = 'User'
+            else:
+                print(f"{comp_choice_name} beats {choice_name}. Computer wins!")
+                result = 'Computer'
+
+        # Asking for another round
+        play_again= input("Would you like to play again?(Y/N):").strip().lower()
+        if play_again != 'y':
+            print("Hope you had fun! Goodbye!")
+            break
 
 
 if __name__ == "__main__":
