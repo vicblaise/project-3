@@ -1,12 +1,9 @@
-
 import random
 
 
 def print_introduction():
-
-
     """print the introduction of the game"""
-    print("""
+    print(f"""
 The rules are:
 1. Rock vs Paper ... Paper wins
 2. Rock vs Scissors... Rock wins
@@ -23,7 +20,13 @@ def main():
         # User's choice
         while True:
             try:
-                choice_num = int(input("Please enter your choice (1-Rock, 2- Paper, 3- Scissors):").strip())
+                choice_num = int(
+                    input(
+                        f"""
+Please enter your choice (1-Rock, 2- Paper, 3- Scissors):"""
+                    ).strip()
+                )
+
                 if choice_num in [1, 2, 3]:
                     choice_name = choices[choice_num]
                     break
@@ -45,9 +48,9 @@ def main():
             result = 'Draw'
         else:
             # Check for win/loss
-            if(choice_num == 1 and comp_choice_num == 3) or \
-            (choice_num == 2 and comp_choice_num == 1) or \
-            (choice_num == 3 and comp_choice_num == 2):
+            if (choice_num == 1 and comp_choice_num == 3) or \
+                            (choice_num == 2 and comp_choice_num == 1) or \
+                            (choice_num == 3 and comp_choice_num == 2):
                 print(f"{choice_name} beats {comp_choice_name}. You win!")
                 result = 'User'
             else:
@@ -55,7 +58,7 @@ def main():
                 result = 'Computer'
 
         # Asking for another round
-        play_again= input("Would you like to play again?(Y/N):").strip().lower()
+        play_again = input("Would you like to play again?(Y/N):").strip().lower()
         if play_again != 'y':
             print("Hope you had fun! Goodbye!")
             break
